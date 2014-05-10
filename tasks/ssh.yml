@@ -1,0 +1,23 @@
+---
+
+- file: dest={{jenkins_home}}/.ssh state=directory
+
+- name: jenkins-ssh | Copy private key pt. 1
+  command: cp {{jenkins_ssh_key_file}} {{jenkins_home}}/.ssh/id_rsa
+           creates={{jenkins_home}}/.ssh/id_rsa
+
+- name: jenkins-ssh | Copy private key pt. 2
+  file: dest={{jenkins_home}}/.ssh/id_rsa mode=0600 owner={{jenkins_user}} group={{jenkins_group}}
+
+- name: jenkins-ssh | Set known hosts pt. 1
+  stat: path={{jenkins_home}}/.ssh/known_hosts
+  register: known_hosts_file
+
+- name: jenkins-ssh | Set known hosts pt. 2
+  shell: ssh-keyscan -H {{item}} >> {{jenkins_home}}/.ssh/known_hosts
+  when: not known_hosts_file.stat.exists
+  with_items: jenkins_ssh_known_hosts
+
+- name: jenkins-ssh | Set known hosts pt. 3
+  file: dest={{jenkins_home}}/.ssh/known_hosts owner={{jenkins_user}} group={{jenkins_group}}
+  when: not known_hosts_file.stat.exists
