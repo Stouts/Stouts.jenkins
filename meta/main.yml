@@ -5,7 +5,7 @@ dependencies: []
 galaxy_info:
   author: klen
   company: Stouts
-  description: Ansible role for manage Jenkins CI
+  description: Ansible role for manage Jenkins CI (installation, plugins, roles)
   license: MIT
   platforms:
   - name: Ubuntu
