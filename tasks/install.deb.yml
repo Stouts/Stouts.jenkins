@@ -1,0 +1,10 @@
+---
+
+- name: jenkins-install | Install Jenkins pt. 1
+  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+
+- name: jenkins-install | Install Jenkins pt. 2
+  apt_repository: url=deb http://pkg.jenkins-ci.org/debian binary/ update_cache=yes
+
+- name: jenkins-install | Install Jenkins pt. 3
+  apt: pkg=jenkins

@@ -1,0 +1,4 @@
+---
+
+jenkins_enabled: yes                        # The role is enabled
+jenkins_configuration: /etc/default/jenkins

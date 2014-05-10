@@ -1,0 +1,8 @@
+---
+
+- include: install.deb.yml
+  when: ansible_os_family == 'Debian'
+  tags: [jenkins, jenkins-install]
+
+- include: configure.yml
+  tags: [jenkins, jenkins-configure]

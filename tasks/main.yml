@@ -1,0 +1,4 @@
+---
+
+- include: jenkins.yml
+  when: jenkins_enabled
