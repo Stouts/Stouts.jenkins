@@ -3,12 +3,19 @@
 jenkins_enabled: yes                        # The role is enabled
 jenkins_name: jenkins
 jenkins_user: jenkins
-jenkins_nginx_proxy: no
-jenkins_nginx_hostname: ""
-jenkins_configuration: /etc/default/jenkins
 jenkins_group: jenkins
+jenkins_http_port: 8000                     # Set jenkins port
+jenkins_plugins: []                         # Ensure the plugins is installed
+jenkins_jobs: []                            # Simple manage Jenkins jobs
+                                            # Ex. jenkins_jobs:
+                                            #       - name: job
+                                            #         action: enable  # (enable|disable|delete)
+                                            #       - name: test
+                                            #         action: disable
+jenkins_nginx_proxy: no                     # Enable nginx proxy
+jenkins_nginx_hostname: ""                  # Set jenkins host
+jenkins_configuration: /etc/default/jenkins
 jenkins_home: /var/lib/jenkins
-jenkins_http_port: 80
 jenkins_java: /usr/bin/java
 jenkins_logdir: /var/log/jenkins
 jenkins_log: "{{jenkins}logdir}}/{{jenkins_name}}.log"

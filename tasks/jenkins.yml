@@ -7,6 +7,14 @@
 - include: configure.yml
   tags: [jenkins, jenkins-configure]
 
+- include: plugins.yml
+  when: jenkins_plugins
+  tags: [jenkins, jenkins-plugins]
+
+- include: jobs.yml
+  when: jenkins_jobs
+  tags: [jenkins, jenkins-jobs]
+
 - include: nginx.yml
   when: jenkins_nginx_proxy
   tags: [jenkins, jenkins-nginx]
