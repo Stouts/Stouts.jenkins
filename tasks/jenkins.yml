@@ -6,3 +6,7 @@
 
 - include: configure.yml
   tags: [jenkins, jenkins-configure]
+
+- include: nginx.yml
+  when: jenkins_nginx_proxy
+  tags: [jenkins, jenkins-nginx]

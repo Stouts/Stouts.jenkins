@@ -1,3 +1,5 @@
 ---
 
 - name: jenkins-configure | Configure Jenkins
+  template: src=jenkins.j2 dest={{jenkins_configuration}}
+  notify: jenkins restart

@@ -1,4 +1,18 @@
 ---
 
 jenkins_enabled: yes                        # The role is enabled
+jenkins_name: jenkins
+jenkins_user: jenkins
+jenkins_nginx_proxy: no
+jenkins_nginx_hostname: ""
 jenkins_configuration: /etc/default/jenkins
+jenkins_group: jenkins
+jenkins_home: /var/lib/jenkins
+jenkins_http_port: 80
+jenkins_java: /usr/bin/java
+jenkins_logdir: /var/log/jenkins
+jenkins_log: "{{jenkins}logdir}}/{{jenkins_name}}.log"
+jenkins_pidfile: /var/run/jenkins.pid
+jenkins_prefix: "/"
+jenkins_run_standalone: yes
+jenkins_war: /usr/share/jenkins/jenkins.war
