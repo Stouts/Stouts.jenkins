@@ -9,5 +9,12 @@
 - name: jenkins-install | Install Jenkins pt. 3
   apt: pkg=jenkins
 
-- name: jenkins-plugins | Copy jenkins-cli
+- name: jenkins-install | Ensure Jenkins started
+  service: name=jenkins state=started
+
+- name: jenkins-install | Copy jenkins-cli
   copy: src=jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar
+
+- name: jenkins-install | Install additional deb packages
+  apt: pkg={{item}}
+  with_items: jenkins_apt_packages

@@ -9,6 +9,7 @@ jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins us
 jenkins_ssh_known_hosts: []                 # Set known hosts for ssh
 jenkins_nginx_proxy: no                     # Enable nginx proxy
 jenkins_nginx_hostname: ""                  # Set jenkins host
+jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
 jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             # Ex. jenkins_jobs:
