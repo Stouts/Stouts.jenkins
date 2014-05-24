@@ -14,3 +14,4 @@
   until: "'OK' in jenkins_cli.msg or 'file already exists' in jenkins_cli.msg"
   retries: 10
   delay: 10
+  when: jenkins_plugins or jenkins_jobs
