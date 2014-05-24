@@ -12,5 +12,5 @@
   get_url: url=http://localhost:{{jenkins_http_port}}/jnlpJars/jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar
   register: jenkins_cli
   until: "'OK' in jenkins_cli.msg or 'file already exists' in jenkins_cli.msg"
-  retries: 5
-  delay: 5
+  retries: 10
+  delay: 10
