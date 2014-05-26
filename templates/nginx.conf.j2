@@ -12,6 +12,11 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Host $http_host;
+
+        {% if jenkins_nginx_auth %}
+            auth_basic "Restricted";
+            auth_basic_user_file {{jenkins_home}}/.htpasswd;
+        {% endif %}
     }
 
     error_log         {{jenkins_logdir}}/nginx-error.log;

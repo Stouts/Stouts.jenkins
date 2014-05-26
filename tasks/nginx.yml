@@ -1,5 +1,10 @@
 ---
 
+- name: jenkins-nginx | Encrypt http auth passwords
+  htpasswd: path={{jenkins_home}}/.htpasswd name={{item.name}} password={{item.password}}
+  with_items: jenkins_nginx_auth_users
+  when: jenkins_nginx_auth
+
 - name: jenkins-nginx | Compile Nginx configuration
   template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/jenkins.conf
   notify:

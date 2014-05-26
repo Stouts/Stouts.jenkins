@@ -12,3 +12,7 @@
 - name: jenkins-install | Install additional deb packages
   apt: pkg={{item}}
   with_items: jenkins_apt_packages
+
+- name: jenkins-install | Setup passlib
+  apt: pkg=python-passlib
+  when: jenkins_nginx_auth
