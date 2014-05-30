@@ -2,8 +2,12 @@
 # Do NOT modify this file by hand!
 
 server {
+    {% if jenkins_nginx_default_server %}
+    listen            80 default_server;
+    {% else %}
     listen            80;
     server_name       {{jenkins_nginx_hostname}};
+    {% endif %}
     client_max_body_size 1024m;
 
     location / {
@@ -14,8 +18,8 @@ server {
         proxy_set_header Host $http_host;
 
         {% if jenkins_nginx_auth %}
-            auth_basic "Restricted";
-            auth_basic_user_file {{jenkins_home}}/.htpasswd;
+        auth_basic "Restricted";
+        auth_basic_user_file {{jenkins_home}}/.htpasswd;
         {% endif %}
     }
 
