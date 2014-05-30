@@ -1,7 +1,7 @@
 ---
 
 - name: jenkins-install | Add apt key
-  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key id=D50582E6
 
 - name: jenkins-install | Add apt repo
   apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' update_cache=yes
