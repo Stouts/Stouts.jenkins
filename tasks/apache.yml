@@ -1,0 +1,11 @@
+---
+
+- name: jenkins-apache | Encrypt http auth passwords
+  htpasswd: path={{jenkins_home}}/.htpasswd name={{item.name}} password={{item.password}}
+  with_items: jenkins_apache_auth_users
+  when: jenkins_apache_auth
+
+- name: jenkins-apache | Compile Apache configuration
+  template: src=apache.conf.j2 dest=/etc/apache2/sites-enabled/jenkins.conf
+  notify:
+    - apache restart
