@@ -3,7 +3,7 @@
 
 server {
     listen            80;
-    server_name       {{jenkins_nginx_hostname}};
+    server_name       {{jenkins_proxy_hostname}};
     client_max_body_size 1024m;
 
     location / {
@@ -13,7 +13,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Host $http_host;
 
-        {% if jenkins_nginx_auth %}
+        {% if jenkins_proxy_auth %}
             auth_basic "Restricted";
             auth_basic_user_file {{jenkins_home}}/.htpasswd;
         {% endif %}

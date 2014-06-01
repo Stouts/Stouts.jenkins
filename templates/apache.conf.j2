@@ -1,11 +1,11 @@
 <VirtualHost *:80>
-  ServerName {{jenkins_apache_hostname}} 
+  ServerName {{jenkins_proxy_hostname}} 
   ProxyPass         /  http://127.0.0.1:{{jenkins_http_port}}/ nocanon
   ProxyPassReverse  /  http://127.0.0.1:{{jenkins_http_port}}/
   ProxyRequests     Off
   AllowEncodedSlashes NoDecode
 
-  {% if jenkins_apache_auth %}
+  {% if jenkins_proxy_auth %}
     <Location />
       AuthType Basic
       AuthName "CI Server"

@@ -6,7 +6,7 @@ Stouts.jenkins
 Ansible role which manage [Jenkins CI](http://jenkins-ci.org/)
 
 * Install and configure Jenkins
-* Proxy jenkins with nginx (enable http auth)
+* Proxy jenkins with nginx/apache (supports http auth)
 * Setup SSH credentials for Jenkins (key, known_hosts)
 * Install Jenkins plugins
 * Manage Jenkins jobs
@@ -28,20 +28,14 @@ jenkins_http_port: 8000                     # Set jenkins port
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to key)
 jenkins_ssh_known_hosts: []                 # Set known hosts for ssh
 
+jenkins_proxy_hostname: ""                  # Set jenkins host
+jenkins_proxy_auth: yes                     # Enable http auth
+jenkins_proxy_auth_users: []                # Add http auth users
+                                            # jenkins_proxy_auth_users:
+                                            #   - { name: team, password: secret }
+
 jenkins_nginx_proxy: no                     # Enable nginx proxy
-jenkins_nginx_hostname: ""                  # Set jenkins host
-jenkins_nginx_auth: yes                     # Enable http auth
-jenkins_nginx_auth_users: []                # Add http auth users
-                                            # jenkins_nginx_auth_users:
-                                            #   - { name: team, password: secret }
-
-jenkins_apache_proxy: no                    # Enable apache proxy
-jenkins_apache_hostname: ""                 # Set jenkins host
-jenkins_apache_auth: no                     # Enable http auth
-jenkins_apache_auth_users: []               # Add http auth users
-                                            # jenkins_apache_auth_users:
-                                            #   - { name: team, password: secret }
-
+jenkins_apache_proxy: no                     # Enable apache proxy
 
 jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
@@ -51,6 +45,7 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             #         action: enable  # (enable|disable|delete)
                                             #       - name: test
                                             #         action: disable
+
 jenkins_configuration: /etc/default/jenkins
 jenkins_home: /var/lib/jenkins
 jenkins_logdir: /var/log/jenkins
@@ -76,7 +71,7 @@ Example:
 
   vars:
       jenkins_nginx_proxy: yes
-      jenkins_nginx_hostname: jenkins.myhost.com
+      jenkins_proxy_hostname: jenkins.myhost.com
       jenkins_ssh_key_file: "{{resources_to}}/resources/jenkins/ssh_key"    # (you can manage remote files with Stouts.resources role)
       jenkins_ssh_known_hosts:
         - bitbucket.org
