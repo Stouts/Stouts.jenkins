@@ -9,7 +9,8 @@ jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins us
 jenkins_ssh_known_hosts: []                 # Set known hosts for ssh
 
 jenkins_proxy: ""                           # Enable jenkins proxy. Values are: nginx, apacha
-jenkins_proxy_hostname: ""                  # Set jenkins host
+jenkins_proxy_hostname: ""                  # Set proxy servername
+jenkins_proxy_port: 80                      # Set proxy port
 jenkins_proxy_auth: yes                     # Enable http auth
 jenkins_proxy_auth_users: []                # Add http auth users
                                             # jenkins_proxy_auth_users:

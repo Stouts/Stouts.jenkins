@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *:{{jenkins_proxy_port}}>
   ServerName {{jenkins_proxy_hostname}} 
   ProxyPass         /  http://127.0.0.1:{{jenkins_http_port}}/ nocanon
   ProxyPassReverse  /  http://127.0.0.1:{{jenkins_http_port}}/

@@ -28,7 +28,8 @@ jenkins_http_port: 8000                     # Set jenkins port
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to key)
 jenkins_ssh_known_hosts: []                 # Set known hosts for ssh
 
-jenkins_proxy_hostname: ""                  # Set jenkins host
+jenkins_proxy_hostname: ""                  # Set proxy servername
+jenkins_proxy_port: 80                      # Set proxy port
 jenkins_proxy_auth: yes                     # Enable http auth
 jenkins_proxy_auth_users: []                # Add http auth users
                                             # jenkins_proxy_auth_users:
@@ -70,7 +71,7 @@ Example:
     - Stouts.jenkins
 
   vars:
-      jenkins_nginx_proxy: yes
+      jenkins_proxy: nginx
       jenkins_proxy_hostname: jenkins.myhost.com
       jenkins_ssh_key_file: "{{resources_to}}/resources/jenkins/ssh_key"    # (you can manage remote files with Stouts.resources role)
       jenkins_ssh_known_hosts:
