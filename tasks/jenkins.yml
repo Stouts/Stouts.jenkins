@@ -24,9 +24,9 @@
   tags: [jenkins-auth]
 
 - include: nginx.yml
-  when: jenkins_nginx_proxy
+  when: jenkins_proxy == "nginx"
   tags: [jenkins-nginx]
 
 - include: apache.yml
-  when: jenkins_apache_proxy
+  when: jenkins_proxy == "apache"
   tags: [jenkins-apache]

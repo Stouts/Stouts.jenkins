@@ -15,4 +15,4 @@
 
 - name: jenkins-install | Setup passlib
   apt: pkg=python-passlib
-  when: jenkins_nginx_auth
+  when: jenkins_proxy_auth
