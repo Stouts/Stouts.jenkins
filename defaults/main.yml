@@ -15,6 +15,13 @@ jenkins_nginx_auth_users: []                # Add http auth users
                                             # jenkins_nginx_auth_users:
                                             #   - { name: team, password: secret }
 
+jenkins_apache_proxy: no                     # Enable apache proxy
+jenkins_apache_hostname: ""                  # Set jenkins host
+jenkins_apache_auth: no                     # Enable http auth
+jenkins_apache_auth_users: []                # Add http auth users
+                                            # jenkins_apache_auth_users:
+                                            #   - { name: team, password: secret }
+
 jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
 jenkins_jobs: []                            # Simple manage Jenkins jobs

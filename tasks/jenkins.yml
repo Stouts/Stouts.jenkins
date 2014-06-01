@@ -22,3 +22,7 @@
 - include: nginx.yml
   when: jenkins_nginx_proxy
   tags: [jenkins, jenkins-nginx]
+
+- include: apache.yml
+  when: jenkins_apache_proxy
+  tags: [jenkins, jenkins-apache]
