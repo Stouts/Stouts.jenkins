@@ -33,7 +33,7 @@ jenkins_logdir: /var/log/jenkins
 jenkins_java: /usr/bin/java
 jenkins_java_args:
   - "-Djava.awt.headless=true"
-jenkins_log: "{{jenkins}logdir}}/{{jenkins_name}}.log"
+jenkins_log: "{{ jenkins_logdir }}/{{ jenkins_name }}.log"
 jenkins_pidfile: /var/run/jenkins.pid
 jenkins_prefix: "/"
 jenkins_run_standalone: yes
