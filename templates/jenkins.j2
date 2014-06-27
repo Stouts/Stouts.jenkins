@@ -3,7 +3,7 @@
 
 NAME={{jenkins_name}}
 JAVA={{jenkins_java}}
-JAVA_ARGS="-Djava.awt.headless=true"
+JAVA_ARGS="{{ jenkins_java_args|default([])|join(' ') }}"
 PIDFILE={{jenkins_pidfile}}
 JENKINS_USER={{jenkins_user}}
 JENKINS_GROUP={{jenkins_group}}
