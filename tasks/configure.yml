@@ -8,6 +8,13 @@
   service: name=jenkins state=restarted
   when: jenkins_configure.changed
 
+- name: Wait untils Jenkins web API is available
+  shell: curl --head --silent http://localhost:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
+  register: result
+  until: result.stdout.find("200 OK") != -1
+  retries: 12
+  delay: 5
+  
 - name: jenkins-configure | Copy jenkins-cli
   get_url: url=http://localhost:{{jenkins_http_port}}/jnlpJars/jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar
   register: jenkins_cli

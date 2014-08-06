@@ -1,18 +1,24 @@
 ---
 
 - name: jenkins-install | Add apt key
-  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key id=D50582E6
-
+  action: apt_key url={{ jenkins_apt_key }}  state=present   
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  
 - name: jenkins-install | Add apt repo
-  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' update_cache=yes
-
+  apt_repository: repo='{{ jenkins_apt_repository }}' update_cache=yes
+#  action: apt_repository repo={{ jenkins_apt_repository }} state=present update_cache=yes 
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  
 - name: jenkins-install | Install jenkins
   apt: pkg=jenkins
-
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  
 - name: jenkins-install | Install additional deb packages
   apt: pkg={{item}}
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   with_items: jenkins_apt_packages
 
 - name: jenkins-install | Setup passlib
   apt: pkg=python-passlib
   when: jenkins_proxy_auth
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

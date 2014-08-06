@@ -18,6 +18,13 @@ jenkins_proxy_auth_users: []                # Add http auth users
                                             # jenkins_proxy_auth_users:
                                             #   - { name: team, password: secret }
 
+#latest
+#jenkins_apt_key: "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
+#jenkins_apt_repository: "deb http://pkg.jenkins-ci.org/debian binary/"
+#latest stable
+jenkins_apt_key: "http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key"
+jenkins_apt_repository: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
+
 jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
 jenkins_jobs: []                            # Simple manage Jenkins jobs
@@ -37,6 +44,7 @@ jenkins_log: "{{ jenkins_logdir }}/{{ jenkins_name }}.log"
 jenkins_pidfile: /var/run/jenkins.pid
 jenkins_prefix: "/"
 jenkins_run_standalone: yes
-jenkins_war: /usr/share/jenkins/jenkins.war
+jenkins_root: /usr/share/jenkins
+jenkins_war: "{{ jenkins_root }}/jenkins.war"
 
 # vim:sw=2

@@ -1,6 +1,33 @@
 ---
+##
+# Apache2 setup.
+#
+- name: Apache | Enable some required modules (rewrite)
+  action: command a2enmod rewrite vhost_alias
+  tags: apache
 
-- name: jenkins-apache | Compile Apache configuration
-  template: src=apache.conf.j2 dest=/etc/apache2/sites-enabled/jenkins.conf
+- name: Apache | Enable some required modules (proxy)
+  action: command a2enmod proxy
+  tags: apache
+
+- name: Apache | Enable some required modules (ssl)
+  action: command a2enmod ssl
+  tags: apache
+
+- name: Apache | Enable some required modules (proxy_http)
+  action: command a2enmod proxy_http
+  tags: apache
+
+- name: Apache | Disable the default site
+  action: command a2dissite default
+  tags: apache
+      
+- name: Apache | Compile Apache Jenkins configuration
+  template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins
+  tags: apache
+
+- name: Apache | Enable our Jenkins site
+  action: command a2ensite jenkins
+  tags: apache
   notify:
-    - apache restart
+    - apache restart  
