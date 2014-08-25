@@ -1,14 +1,15 @@
 ---
 
 - name: jenkins-install | Add apt key
-  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key id=D50582E6
-
+  action: apt_key url="{{ jenkins_apt_key }}"  state=present   
+  
 - name: jenkins-install | Add apt repo
-  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' update_cache=yes
-
+  apt_repository: repo="{{ jenkins_apt_repository }}" update_cache=yes
+  
 - name: jenkins-install | Install jenkins
-  apt: pkg=jenkins
-
+  apt: pkg={{item}}
+  with_items: [curl, jenkins]
+  
 - name: jenkins-install | Install additional deb packages
   apt: pkg={{item}}
   with_items: jenkins_apt_packages
@@ -16,3 +17,5 @@
 - name: jenkins-install | Setup passlib
   apt: pkg=python-passlib
   when: jenkins_proxy_auth
+
+# vim:sw=2
