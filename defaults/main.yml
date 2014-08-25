@@ -1,10 +1,16 @@
 ---
 
 jenkins_enabled: yes                        # The role is enabled
+
 jenkins_name: jenkins
 jenkins_user: jenkins
 jenkins_group: jenkins
-jenkins_http_port: 8000                     # Set jenkins port
+jenkins_configuration: /etc/default/jenkins
+jenkins_home: /var/lib/jenkins              # Jenkins home location
+jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep files
+jenkins_http_host: 127.0.0.1                # Set HTTP host
+jenkins_http_port: 8000                     # Set HTTP port
+
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to key)
 jenkins_ssh_fingerprints:                   # Set known hosts for ssh
   - "bitbucket.org,131.103.20.167 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=="
@@ -34,17 +40,25 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             #       - name: test
                                             #         action: disable
 
-jenkins_configuration: /etc/default/jenkins
-jenkins_home: /var/lib/jenkins
-jenkins_logdir: /var/log/jenkins
 jenkins_java: /usr/bin/java
 jenkins_java_args:
   - "-Djava.awt.headless=true"
-jenkins_log: "{{ jenkins_logdir }}/{{ jenkins_name }}.log"
 jenkins_pidfile: /var/run/jenkins.pid
 jenkins_prefix: "/"
 jenkins_run_standalone: yes
-jenkins_root: /usr/share/jenkins
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
+
+# Logging
+# =======
+jenkins_log: "{{ jenkins_logdir }}/{{ jenkins_name }}.log"
+jenkins_logdir: /var/log/jenkins            # Jenkins logs location
+jenkins_logrotate: yes                      # Rotate Jenkins logs.
+jenkins_logrotate_options:
+  - compress
+  - copytruncate
+  - daily
+  - dateext
+  - rotate 7
+  - size 10M
 
 # vim:sw=2

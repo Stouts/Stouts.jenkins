@@ -14,10 +14,11 @@
   
 - name: Wait untils Jenkins web API is available
   shell: curl --head --silent http://localhost:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
-  register: result
-  until: result.stdout.find("200 OK") != -1
-  retries: 12
+  changed_when: False
   delay: 5
+  register: result
+  retries: 12
+  until: result.stdout.find("200 OK") != -1
   
 - name: jenkins-configure | Copy jenkins-cli
   get_url: url=http://localhost:{{jenkins_http_port}}/jnlpJars/jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar
@@ -26,3 +27,7 @@
   retries: 10
   delay: 10
   when: jenkins_plugins or jenkins_jobs
+
+- name: Configure log rotation
+  template: src=logrotate.conf.j2 dest=/etc/logrotate.d/jenkins.conf
+  when: jenkins_logrotate

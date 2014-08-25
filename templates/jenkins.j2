@@ -35,7 +35,7 @@ JENKINS_RUN=/var/run/jenkins
 RUN_STANDALONE={{'true' if jenkins_run_standalone else 'false'}}
 
 # log location.  this may be a syslog facility.priority
-JENKINS_LOG=/var/log/jenkins/$NAME.log
+JENKINS_LOG={{jenkins_log}}
 
 # OS LIMITS SETUP
 #   comment this out to observe /etc/security/limits.conf
@@ -44,15 +44,14 @@ JENKINS_LOG=/var/log/jenkins/$NAME.log
 #   descriptors are forced to 1024 regardless of /etc/security/limits.conf
 MAXOPENFILES=8192
 
-# port for HTTP connector (default 8080; disable with -1)
-HTTP_PORT={{jenkins_http_port}}
-
 # port for AJP connector (disabled by default)
 AJP_PORT=-1
 
 # Listen address for HTTP connector
-#HTTP_HOST=127.0.0.1
-HTTP_HOST=0.0.0.0
+HTTP_HOST={{jenkins_http_host}}
+
+# port for HTTP connector (default 8080; disable with -1)
+HTTP_PORT={{jenkins_http_port}}
 
 # Listen address for AJP connector
 AJP_HOST=127.0.0.1
