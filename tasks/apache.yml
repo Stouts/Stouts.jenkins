@@ -20,13 +20,14 @@
 - name: Apache | Enable some required modules (proxy_http)
   action: command a2enmod proxy_http
   tags: apache
-  
+
 - name: Apache | Enable some required modules (ssl)
   action: command a2enmod ssl
   tags: apache
 
 - name: Apache | Disable the default site
   action: command a2dissite default
+  ignore_errors: yes  
   tags: apache
       
 - name: Apache | Compile Apache Jenkins configuration

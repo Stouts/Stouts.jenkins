@@ -8,7 +8,7 @@
 
 - name: jenkins-ssh | Copy private key pt. 2
   file: dest={{jenkins_home}}/.ssh/id_rsa mode=0600 owner={{jenkins_user}} group={{jenkins_group}}
-
+  
 - name: jenkins-ssh | Setup SSH hosts
   lineinfile: 
     line="{{item}}"
