@@ -9,7 +9,7 @@
 - file: path={{jenkins_home}}/updates/default.json owner={{jenkins_user}} group={{jenkins_group}} mode=0755
 
 - name: jenkins-plugins | Install Jenkins plugins.
-  command: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://127.0.0.1:{{jenkins_http_port}}/ install-plugin {{item}} creates={{jenkins_home}}/plugins/{{item}}.jpi
+  command: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://{{jenkins_http_host}}:{{jenkins_http_port}}/ install-plugin {{item}} creates={{jenkins_home}}/plugins/{{item}}.jpi
   with_items: jenkins_plugins
   ignore_errors: yes
   notify: jenkins restart
