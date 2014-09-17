@@ -11,6 +11,9 @@ Ansible role which manage [Jenkins CI](http://jenkins-ci.org/)
 * Install Jenkins plugins
 * Manage Jenkins jobs
 
+> The role needs a root access to run.
+> Add `sudo: yes` in your playbook.
+
 TODO:
 * Create jobs
 
