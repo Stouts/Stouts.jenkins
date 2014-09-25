@@ -61,4 +61,10 @@ jenkins_logrotate_options:
   - rotate 7
   - size 10M
 
+jenkins_check_jobs:                         # Checking jobs during a provision
+                                            # Ensure the last build is success, before update
+                                            # Eg. jenkins_check_jobs:
+                                            #     - url: http://jenkins.project.com
+                                            #       job: project-develop
+
 # vim:sw=2

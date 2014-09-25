@@ -3,3 +3,7 @@
 - include: jenkins.yml
   when: jenkins_enabled
   tags: [jenkins]
+
+- include: checkjobs.yml
+  when: jenkins_check_jobs
+  tags: [jenkins]

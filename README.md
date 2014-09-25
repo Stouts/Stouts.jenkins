@@ -83,6 +83,12 @@ jenkins_logrotate_options:
   - dateext
   - rotate 7
   - size 10M
+
+jenkins_check_jobs:                         # Checking jobs during a provision
+                                            # Ensure the last build is success, before update
+                                            # Eg. jenkins_check_jobs:
+                                            #     - url: http://jenkins.project.com
+                                            #       job: project-develop
 ```
 
 #### Usage
@@ -105,6 +111,30 @@ Example:
         - name: test
           action: delete
 ```
+
+#### Check builds during provision
+
+You could use the role for checking builds during provision.
+By example, update servers only if last build was successful:
+
+```yaml
+
+- hosts: all
+
+  roles:
+    - Stouts.jenkins
+    ...                             # Other server roles
+
+  vars:
+      jenkins_enabled: no           # We dont need to install Jenkins on this host
+      jenkins_check_jobs:
+      - url: jenkins.myproject.com  # Url when jenkins is installed
+        job: myproject-master       # Job name
+        user: myproject             # (optional) HTTP Basic Auth
+        password: mypassword
+```
+
+In this example, provision will continue only if last build was success.
 
 #### License
 
