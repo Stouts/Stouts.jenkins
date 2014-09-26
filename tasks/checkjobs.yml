@@ -11,5 +11,5 @@
 
 - name: jenkins-checkjobs | Check statuses of Jenkins jobs
   fail: msg="Jenkins build {{item.item.job}} is failed. Stop provision."
-  when: ('"result":"SUCCESS"' in item.content)
+  when: ('"result":"SUCCESS"' not in item.content)
   with_items: jenkins_jobs['results']
