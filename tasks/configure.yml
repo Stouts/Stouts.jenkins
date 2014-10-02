@@ -9,7 +9,7 @@
   when: jenkins_configure.changed
 
 - name: Create {{ jenkins_home }} folder
-  file: path={{ jenkins_home }} state=directory mode=0700 owner={{ jenkins_user }}
+  file: path={{ jenkins_home }} state=directory mode=0755 owner={{ jenkins_user }}
   ignore_errors: True
   
 - name: Wait untils Jenkins web API is available
