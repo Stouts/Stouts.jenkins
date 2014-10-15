@@ -17,7 +17,7 @@
   register: result
   until: result.stdout.find("200 OK") != -1
   retries: 12
-  delay: 5
+  delay: 50
   
 - name: jenkins-configure | Copy jenkins-cli
   get_url: url=http://localhost:{{jenkins_http_port}}/jnlpJars/jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar

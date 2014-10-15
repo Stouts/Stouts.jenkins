@@ -35,16 +35,21 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             #         action: disable
 
 jenkins_configuration: /etc/default/jenkins
-jenkins_home: /var/lib/jenkins
-jenkins_logdir: /var/log/jenkins
+jenkins_home_dir: /var/lib/jenkins
+jenkins_log_dir: /var/log/jenkins
 jenkins_java: /usr/bin/java
 jenkins_java_args:
   - "-Djava.awt.headless=true"
-jenkins_log: "{{ jenkins_logdir }}/{{ jenkins_name }}.log"
+jenkins_log: "{{ jenkins_log_dir }}/{{ jenkins_name }}.log"
 jenkins_pidfile: /var/run/jenkins.pid
 jenkins_prefix: "/"
 jenkins_run_standalone: yes
 jenkins_root: /usr/share/jenkins
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
+
+docker_files_generated_directory         : "roles/jenkins-master"
+docker_volume_directory                  : "{{ jenkins_home_dir }}"
+docker_working_directory                 : "/home/vagrant"
+docker_image_name                        : "nabla/ansible-jenkins-master"
 
 # vim:sw=2

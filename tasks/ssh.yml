@@ -1,13 +1,13 @@
 ---
 
-- file: dest={{jenkins_home}}/.ssh state=directory
+- file: dest={{jenkins_home_dir}}/.ssh state=directory
 
 - name: jenkins-ssh | Copy private key pt. 1
-  command: cp {{jenkins_ssh_key_file}} {{jenkins_home}}/.ssh/id_rsa
-           creates={{jenkins_home}}/.ssh/id_rsa
+  command: cp {{jenkins_ssh_key_file}} {{jenkins_home_dir}}/.ssh/id_rsa
+           creates={{jenkins_home_dir}}/.ssh/id_rsa
 
 - name: jenkins-ssh | Copy private key pt. 2
-  file: dest={{jenkins_home}}/.ssh/id_rsa mode=0600 owner={{jenkins_user}} group={{jenkins_group}}
+  file: dest={{jenkins_home_dir}}/.ssh/id_rsa mode=0600 owner={{jenkins_user}} group={{jenkins_group}}
   
 - name: jenkins-ssh | Setup SSH hosts
   lineinfile: 
@@ -16,6 +16,6 @@
     state="present"
     create="yes"
     mode="0644"
-    dest="{{jenkins_home}}/.ssh/known_hosts"
+    dest="{{jenkins_home_dir}}/.ssh/known_hosts"
     owner="{{jenkins_user}}"
   with_items: jenkins_ssh_fingerprints

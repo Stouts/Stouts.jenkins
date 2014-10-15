@@ -31,7 +31,7 @@
   tags: apache
       
 - name: Apache | Compile Apache Jenkins configuration
-  template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins
+  template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins.conf
   tags: apache
 
 - name: Apache | Enable our Jenkins site

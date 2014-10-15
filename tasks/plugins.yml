@@ -1,15 +1,15 @@
 ---
 
-- file: path={{jenkins_home}}/updates owner={{jenkins_user}} group={{jenkins_group}} mode=0755 state=directory
+- file: path={{jenkins_home_dir}}/updates owner={{jenkins_user}} group={{jenkins_group}} mode=0755 state=directory
 
 - name: jenkins-plugins | Update Jenkins plugin data.
-  shell: curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' > /{{jenkins_home}}/updates/default.json
-    creates=/{{jenkins_home}}/updates/default.json
+  shell: curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' > /{{jenkins_home_dir}}/updates/default.json
+    creates=/{{jenkins_home_dir}}/updates/default.json
 
-- file: path={{jenkins_home}}/updates/default.json owner={{jenkins_user}} group={{jenkins_group}} mode=0755
+- file: path={{jenkins_home_dir}}/updates/default.json owner={{jenkins_user}} group={{jenkins_group}} mode=0755
 
 - name: jenkins-plugins | Install Jenkins plugins.
-  command: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://127.0.0.1:{{jenkins_http_port}}/ install-plugin {{item}} creates={{jenkins_home}}/plugins/{{item}}.jpi
+  command: java -jar {{jenkins_home_dir}}/jenkins-cli.jar -s http://127.0.0.1:{{jenkins_http_port}}/ install-plugin {{item}} creates={{jenkins_home_dir}}/plugins/{{item}}.jpi
   with_items: jenkins_plugins
   ignore_errors: yes
   notify: jenkins restart

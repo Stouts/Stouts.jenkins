@@ -1,7 +1,7 @@
 ---
 
 - name: jenkins-auth | Encrypt http auth passwords
-  htpasswd: path={{jenkins_home}}/.htpasswd name={{item.name}} password={{item.password}}
+  htpasswd: path={{jenkins_home_dir}}/.htpasswd name={{item.name}} password={{item.password}}
   with_items: jenkins_proxy_auth_users
   when: jenkins_proxy_auth
 

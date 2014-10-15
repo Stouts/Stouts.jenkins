@@ -1,5 +1,5 @@
 ---
 
 - name: jenkins-jobs | Manage jobs
-  shell: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://127.0.0.1:{{jenkins_http_port}}{{ jenkins_prefix }}/ {{item.action}}-job {{item.name}}
+  shell: java -jar {{jenkins_home_dir}}/jenkins-cli.jar -s http://127.0.0.1:{{jenkins_http_port}}{{ jenkins_prefix }}/ {{item.action}}-job {{item.name}}
   with_items: jenkins_jobs

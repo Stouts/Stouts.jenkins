@@ -1,0 +1,15 @@
+---
+#
+# integration-tests.yml
+#
+
+- hosts: all
+  sudo: True
+  tasks:
+    # Tests
+    - name: Check git
+      command: which git
+      register: git_path
+    - debug: msg="Git was installed in {{git_path.stdout}}"
+    - fail: msg="Git not found, tests failed."
+      when: git_path.stdout != "{{git_path}}/git"
