@@ -31,3 +31,5 @@ jenkins_proxy_auth: yes
 jenkins_proxy_hostname: localhost
 jenkins_proxy_auth_users:
 - { name: travis, password: travis }
+docker_files_generated_directory: ""
+docker_files_enable: no
