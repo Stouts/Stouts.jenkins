@@ -9,7 +9,7 @@ VOLUME      [{{ docker_volume_directory }}]
 MAINTAINER  Alban Andrieu "https://github.com/AlbanAndrieu"
 
 ENV			DEBIAN_FRONTEND noninteractive
-ENV         JENKINS_HOME {{ jenkins_home }}
+ENV         JENKINS_HOME {{ jenkins_home_dir }}
 ENV         WORKDIR /home/vagrant
 
 # Working dir
@@ -22,32 +22,30 @@ RUN         pwd
 RUN         ls -lrta
 
 # ADD
-ADD defaults $WORKDIR/ansible-zap/defaults
-ADD meta $WORKDIR/ansible-zap/meta
-ADD files $WORKDIR/ansible-zap/files
-ADD handlers $WORKDIR/ansible-zap/handlers
-ADD tasks $WORKDIR/ansible-zap/tasks
-ADD templates $WORKDIR/ansible-zap/templates
-ADD vars $WORKDIR/ansible-zap/vars
+ADD defaults $WORKDIR/ansible-jenkins-master/defaults
+ADD meta $WORKDIR/ansible-jenkins-master/meta
+ADD files $WORKDIR/ansible-jenkins-master/files
+ADD handlers $WORKDIR/ansible-jenkins-master/handlers
+ADD tasks $WORKDIR/ansible-jenkins-master/tasks
+ADD templates $WORKDIR/ansible-jenkins-master/templates
+ADD vars $WORKDIR/ansible-jenkins-master/vars
 
 # Here we continue to use add because
 # there are a limited number of RUNs
 # allowed.
 ADD hosts /etc/ansible/hosts
-ADD zap.yml $WORKDIR/ansible-zap/zap.yml
+ADD jenkins-master.yml $WORKDIR/ansible-jenkins-master/jenkins-master.yml
 
 # Execute
 RUN         pwd
 RUN         ls -lrta
-RUN         ansible-playbook $WORKDIR/ansible-zap/zap.yml -c local -vvvv
+RUN         ansible-playbook $WORKDIR/ansible-jenkins-master/jenkins-master.yml -c local -vvvv
 
-#RUN         apt-get update && \
-#            apt-get install -y openssh-server openjdk-7-jre-headless
-#RUN         useradd -m -s /bin/bash jenkins
-#RUN         echo jenkins:jenkins | chpasswd
-#RUN         mkdir -p /var/run/sshd
-            
-EXPOSE      22
-ENTRYPOINT  ["{{zap_base_dir}}/zap{{zap_major}}/zap.sh"]
-CMD /usr/sbin/sshd -D
-#CMD ["-g", "deamon off;"]
+#RUN apt-get update && apt-get clean
+#RUN apt-get install -q -y openjdk-7-jre-headless 
+#RUN apt-get install -y tomcat6
+#RUN apt-get clean
+
+EXPOSE 21:9999
+ENTRYPOINT  ["/etc/init.d/jenkins", "start"]
+CMD ["-g", "deamon off;"]
