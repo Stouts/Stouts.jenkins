@@ -48,8 +48,8 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             #         action: disable
 
 jenkins_configuration: /etc/default/jenkins
-jenkins_home: /var/lib/jenkins
-jenkins_logdir: /var/log/jenkins
+jenkins_home_dir: /var/lib/jenkins
+jenkins_log_dir: /var/log/jenkins
 jenkins_java: /usr/bin/java
 jenkins_log: "{{jenkins}logdir}}/{{jenkins_name}}.log"
 jenkins_pidfile: /var/run/jenkins.pid

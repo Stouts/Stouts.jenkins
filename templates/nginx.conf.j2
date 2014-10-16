@@ -17,11 +17,11 @@ server {
 
         {% if jenkins_proxy_auth %}
         auth_basic "Restricted";
-        auth_basic_user_file {{jenkins_home}}/.htpasswd;
+        auth_basic_user_file {{jenkins_home_dir}}/.htpasswd;
         {% endif %}
     }
 
-    error_log         {{jenkins_logdir}}/nginx-error.log;
-    access_log        {{jenkins_logdir}}/nginx-access.log;
+    error_log         {{jenkins_log_dir}}/nginx-error.log;
+    access_log        {{jenkins_log_dir}}/nginx-access.log;
 
 }

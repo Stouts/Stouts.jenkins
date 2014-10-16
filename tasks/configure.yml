@@ -8,8 +8,8 @@
   service: name=jenkins state=restarted
   when: jenkins_configure.changed
 
-- name: Create {{ jenkins_home }} folder
-  file: path={{ jenkins_home }} state=directory mode=0700 owner={{ jenkins_user }}
+- name: Create {{ jenkins_home_dir }} folder
+  file: path={{ jenkins_home_dir }} state=directory mode=0700 owner={{ jenkins_user }}
   ignore_errors: True
   
 - name: Wait untils Jenkins web API is available
@@ -20,7 +20,7 @@
   delay: 50
   
 - name: jenkins-configure | Copy jenkins-cli
-  get_url: url=http://localhost:{{jenkins_http_port}}/jnlpJars/jenkins-cli.jar dest={{jenkins_home}}/jenkins-cli.jar
+  get_url: url=http://localhost:{{jenkins_http_port}}{{ jenkins_prefix }}/jnlpJars/jenkins-cli.jar dest={{jenkins_home_dir}}/jenkins-cli.jar
   register: jenkins_cli
   until: "'OK' in jenkins_cli.msg or 'file already exists' in jenkins_cli.msg"
   retries: 10

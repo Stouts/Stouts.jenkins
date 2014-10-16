@@ -9,7 +9,7 @@
     <Location />
       AuthType Basic
       AuthName "CI Server"
-      AuthUserFile {{jenkins_home}}/.htpasswd
+      AuthUserFile {{jenkins_home_dir}}/.htpasswd
       Require valid-user
     </Location>
   {% endif %}
