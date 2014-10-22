@@ -1,13 +1,16 @@
 Stouts.jenkins
 ==============
 
-[![Build Status](https://travis-ci.org/Stouts/Stouts.jenkins.png)](https://travis-ci.org/Stouts/Stouts.jenkins)
+
+[![Build Status](http://img.shields.io/travis/Stouts/Stouts.jenkins.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.jenkins)
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.jenkins-blue.svg?style=flat-square)](https://galaxy.jenkins.com/list#/roles/858)
+[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.jenkins.svg?style=flat-square)]()
 
 Ansible role which manage [Jenkins CI](http://jenkins-ci.org/)
 
 * Install and configure Jenkins
 * Proxy jenkins with nginx/apache (supports http auth)
-* Setup SSH credentials for Jenkins (key, known_hosts)
+* Setup SSH credentials for Jenkins (key, knownhosts)
 * Install Jenkins plugins
 * Manage Jenkins jobs
 
