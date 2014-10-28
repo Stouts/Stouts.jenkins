@@ -1,5 +1,9 @@
 ---
 
+- name: jenkins-checkjobs | Install dependencies
+  apt: name=python-httplib2
+  when: ansible_os_family == 'Debian'
+
 - name: jenkins-checkjobs | Load statuses of Jenkins jobs
   uri: url="{{item.url}}/job/{{item.job}}/lastBuild/api/json"
        forse_basic_auth={{item.forse_basic_auth|default(False)}}
