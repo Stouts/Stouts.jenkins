@@ -47,7 +47,8 @@ jenkins_run_standalone: yes
 jenkins_root: /usr/share/jenkins
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
 
-docker_files_generated_directory         : "roles/jenkins-master"
+docker_files_generated_directory: "./"
+docker_files_enable: no
 docker_volume_directory                  : "{{ jenkins_home_dir }}"
 docker_working_directory                 : "/home/vagrant"
 docker_image_name                        : "nabla/ansible-jenkins-master"
