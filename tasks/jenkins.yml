@@ -30,6 +30,3 @@
 - include: apache.yml
   when: jenkins_proxy == "apache"
   tags: [jenkins-apache]
-
-- name: copy Dockerfile
-  template: src=Dockerfile.j2 dest=roles/jenkins-master/Dockerfile mode=0700

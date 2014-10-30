@@ -7,7 +7,7 @@
         jenkins_nginx_proxy: yes,
         jenkins_proxy_auth: yes,
         jenkins_proxy_hostname: localhost,        
-        #docker_files_enable: yes
+        docker_files_enable: yes
       }
 
   vars:
