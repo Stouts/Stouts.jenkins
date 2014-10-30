@@ -6,9 +6,10 @@
         docker_files_enable: yes,
         jenkins_nginx_proxy: yes,
         jenkins_proxy_auth: yes,
-        jenkins_proxy_hostname: localhost,
-        jenkins_proxy_auth_users:
-        - { name: travis, password: travis },
+        jenkins_proxy_hostname: localhost,        
         docker_files_enable: yes
       }
 
+  vars:
+      jenkins_proxy_auth_users:
+        - { name: travis, password: travis }
