@@ -25,10 +25,3 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   - sudo /etc/init.d/jenkins status || exit 1
-
-jenkins_nginx_proxy: yes
-jenkins_proxy_auth: yes
-jenkins_proxy_hostname: localhost
-jenkins_proxy_auth_users:
-- { name: travis, password: travis }
-docker_files_enable: yes
