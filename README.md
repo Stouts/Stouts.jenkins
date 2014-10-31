@@ -19,6 +19,10 @@ Ansible role which manage [Jenkins CI](http://jenkins-ci.org/)
 TODO:
 * Create jobs
 
+> The role does not install a proxy server (nginx, apache)
+> I recommed to use other roles for install proxies (example
+> [Stouts.nginx](https://github.com/Stouts/Stouts.nginx))
+
 
 #### Variables
 
