@@ -5,9 +5,12 @@
 - name: jenkins-ssh | Copy private key pt. 1
   command: cp {{jenkins_ssh_key_file}} {{jenkins_home}}/.ssh/id_rsa
            creates={{jenkins_home}}/.ssh/id_rsa
+  register: jenkins_key
+  when: jenkins_ssh_key_file
 
 - name: jenkins-ssh | Copy private key pt. 2
   file: dest={{jenkins_home}}/.ssh/id_rsa mode=0600 owner={{jenkins_user}} group={{jenkins_group}}
+  when: jenkins_key|changed
 
 - name: jenkins-ssh | Setup SSH hosts
   lineinfile: 

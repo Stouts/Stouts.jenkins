@@ -2,31 +2,31 @@
 
 - include: install.deb.yml
   when: ansible_os_family == 'Debian'
-  tags: [jenkins-install]
+  tags: [jenkins, jenkins-install]
 
 - include: configure.yml
-  tags: [jenkins-configure]
+  tags: [jenkins, jenkins-configure]
 
 - include: plugins.yml
   when: jenkins_plugins
-  tags: [jenkins-plugins]
+  tags: [jenkins, jenkins-plugins]
 
 - include: ssh.yml
   when: jenkins_ssh_key_file != ""
-  tags: [jenkins-ssh]
+  tags: [jenkins, jenkins-ssh]
 
 - include: jobs.yml
   when: jenkins_jobs
-  tags: [jenkins-jobs]
+  tags: [jenkins, jenkins-jobs]
 
 - include: auth.yml
   when: jenkins_proxy_auth
-  tags: [jenkins-auth]
+  tags: [jenkins, jenkins-auth]
 
 - include: nginx.yml
   when: jenkins_proxy == "nginx"
-  tags: [jenkins-nginx]
+  tags: [jenkins, jenkins-nginx]
 
 - include: apache.yml
   when: jenkins_proxy == "apache"
-  tags: [jenkins-apache]
+  tags: [jenkins, jenkins-apache]
