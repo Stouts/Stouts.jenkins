@@ -1,6 +1,4 @@
 # {{ ansible_managed }}
-#FROM        debian:jessie
-#FROM        stackbrew/ubuntu:14.04
 FROM        jasongiedymin/ansible-base-ubuntu
 
 # Volume can be accessed outside of container
@@ -9,43 +7,36 @@ VOLUME      [{{ docker_volume_directory }}]
 MAINTAINER  Alban Andrieu "https://github.com/AlbanAndrieu"
 
 ENV			DEBIAN_FRONTEND noninteractive
-ENV         JENKINS_HOME {{ jenkins_home_dir }}
+ENV         JENKINS_HOME {{ jenkins_home }}
 ENV         WORKDIR /home/vagrant
 
 # Working dir
 WORKDIR {{ docker_working_directory }}
 
-# COPY
-#COPY
-
 RUN         pwd
 RUN         ls -lrta
 
 # ADD
-ADD defaults $WORKDIR/ansible-jenkins-master/defaults
-ADD meta $WORKDIR/ansible-jenkins-master/meta
-ADD files $WORKDIR/ansible-jenkins-master/files
-ADD handlers $WORKDIR/ansible-jenkins-master/handlers
-ADD tasks $WORKDIR/ansible-jenkins-master/tasks
-ADD templates $WORKDIR/ansible-jenkins-master/templates
-ADD vars $WORKDIR/ansible-jenkins-master/vars
+ADD defaults $WORKDIR/AlbanAndrieu/Stouts.jenkins/defaults
+ADD meta $WORKDIR/AlbanAndrieu/Stouts.jenkins/meta
+ADD files $WORKDIR/AlbanAndrieu/Stouts.jenkins/files
+ADD handlers $WORKDIR/AlbanAndrieu/Stouts.jenkins/handlers
+ADD tasks $WORKDIR/AlbanAndrieu/Stouts.jenkins/tasks
+ADD templates $WORKDIR/AlbanAndrieu/Stouts.jenkins/templates
+ADD vars $WORKDIR/AlbanAndrieu/Stouts.jenkins/vars
 
 # Here we continue to use add because
 # there are a limited number of RUNs
 # allowed.
 ADD hosts /etc/ansible/hosts
-ADD jenkins-master.yml $WORKDIR/ansible-jenkins-master/jenkins-master.yml
+ADD jenkins-master.yml $WORKDIR/AlbanAndrieu/Stouts.jenkins/jenkins-master.yml
 
 # Execute
 RUN         pwd
 RUN         ls -lrta
-RUN         ansible-playbook $WORKDIR/ansible-jenkins-master/jenkins-master.yml -c local -vvvv
+RUN         ansible-playbook $WORKDIR/AlbanAndrieu/Stouts.jenkins/jenkins-master.yml -c local -vvvv
 
-#RUN apt-get update && apt-get clean
-#RUN apt-get install -q -y openjdk-7-jre-headless 
-#RUN apt-get install -y tomcat6
-#RUN apt-get clean
-
+#TODO improve below port range
 EXPOSE 21:9999
 ENTRYPOINT  ["/etc/init.d/jenkins", "start"]
 CMD ["-g", "deamon off;"]
