@@ -3,7 +3,7 @@
   sudo: true
   roles:
     - { role: ./,
-        docker_files_enable: yes,
+        docker_files_enable: no,
         jenkins_nginx_proxy: yes,
         jenkins_proxy_auth: yes,
         jenkins_proxy_hostname: localhost,        
