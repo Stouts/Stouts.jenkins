@@ -30,6 +30,18 @@
   ignore_errors: yes  
   tags: apache
       
+- name: Apache | Configure Apache
+  lineinfile:
+    dest: "{{ apache_server_root }}/ports.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+#    validate: '/usr/sbin/apache2ctl -f %s -t'
+  with_items: apache_ports_configuration_items
+  tags: apache
+  notify:
+    - apache restart      
+      
 - name: Apache | Compile Apache Jenkins configuration
   template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins.conf
   tags: apache

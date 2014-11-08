@@ -1,0 +1,13 @@
+---
+apache_server_root: /etc/httpd
+apache_listen_port: "{{ jenkins_proxy_port }}"
+
+apache_ports_configuration_items:
+  - {
+    regexp: "^Listen ",
+    line: "Listen {{ apache_listen_port }}"
+  }
+  - {
+    regexp: "^NameVirtualHost ",
+    line: "NameVirtualHost *:{{ apache_listen_port }}"
+  }
