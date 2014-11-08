@@ -9,7 +9,7 @@ install:
   - pip install ansible>=1.6.0
 script:
   # Prepare tests
-#  - echo localhost > inventory
+  - echo localhost > inventory
 
   # Check syntax
   - ansible-playbook --syntax-check -i hosts test.yml
@@ -18,10 +18,10 @@ script:
   - ansible-playbook -i hosts test.yml --connection=local --sudo
 
   # Second run Idempotence test
-#  - >
-#    ansible-playbook -i hosts test.yml --connection=local --sudo
-#    | grep -q 'changed=0.*failed=0'
-#    && (echo 'Idempotence test: pass' && exit 0)
-#    || (echo 'Idempotence test: fail' && exit 1)
+  - >
+    ansible-playbook -i hosts test.yml --connection=local --sudo
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
 
   - sudo /etc/init.d/jenkins status || exit 1

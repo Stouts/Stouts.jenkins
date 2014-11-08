@@ -1,5 +1,4 @@
 ---
-
 dependencies: []
 
 galaxy_info:
@@ -13,5 +12,4 @@ galaxy_info:
     - all
   categories:
   - development
-  - jenkins
   - system
