@@ -1,0 +1,9 @@
+---
+apache_server_root: /etc/apache2
+apache_listen_port: "{{ jenkins_proxy_port }}"
+
+apache_ports_configuration_items:
+  - {
+    regexp: "^Listen ",
+    line: "Listen {{ apache_listen_port }}"
+  }

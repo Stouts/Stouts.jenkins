@@ -67,4 +67,8 @@ jenkins_check_jobs:                         # Checking jobs during a provision
                                             #     - url: http://jenkins.project.com
                                             #       job: project-develop
 
-# vim:sw=2
+docker_files_generated_directory: "./"
+docker_files_enable: no
+docker_volume_directory                  : "{{ jenkins_home }}"
+docker_working_directory                 : "/home/vagrant"
+docker_image_name                        : "nabla/ansible-jenkins-master"
