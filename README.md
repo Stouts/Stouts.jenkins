@@ -112,7 +112,7 @@ Example:
   vars:
       jenkins_proxy: nginx
       jenkins_proxy_hostname: jenkins.myhost.com
-      jenkins_ssh_key_file: "{{resources_to}}/resources/jenkins/ssh_key"    # (you can manage remote files with Stouts.resources role)
+      jenkins_ssh_key_file: "{{inventory_dir}}/jenkins/ssh_key"
       jenkins_jobs:
         - name: test
           action: delete
