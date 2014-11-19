@@ -72,3 +72,9 @@ docker_files_enable: no
 docker_volume_directory                  : "{{ jenkins_home }}"
 docker_working_directory                 : "/home/vagrant"
 docker_image_name                        : "nabla/ansible-jenkins-master"
+
+# Sytem config
+# ===========
+jenkins_system_config:
+  admin_email: nobody@example.com
+
