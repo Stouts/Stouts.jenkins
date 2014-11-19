@@ -1,0 +1,10 @@
+#!/bin/sh
+
+export JOB="$1"
+export CLI="java -jar {{jenkins_home}}/jenkins-cli.jar -s http://{{jenkins_http_host}}:{{jenkins_http_port}}"
+
+[ -z "$JOB" ] && exit 1
+
+[ -d "{{jenkins_home}}/jobs/$JOB" ] || $CLI create-job $JOB < {{jenkins_home}}/jobs/${JOB}.xml
+
+$CLI update-job $JOB < {{jenkins_home}}/jobs/${JOB}.xml

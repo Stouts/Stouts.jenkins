@@ -28,8 +28,9 @@ jenkins_proxy_auth_users: []                # Add http auth users
 #jenkins_apt_key: "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
 #jenkins_apt_repository: "deb http://pkg.jenkins-ci.org/debian binary/"
 #latest stable
-jenkins_apt_key: "http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key"
-jenkins_apt_repository: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
+jenkins_apt_key: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
+jenkins_apt_key_id: D50582E6
+jenkins_apt_repository: deb http://pkg.jenkins-ci.org/debian-stable binary/
 
 jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
@@ -37,8 +38,10 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             # Ex. jenkins_jobs:
                                             #       - name: job
                                             #         action: enable  # (enable|disable|delete)
-                                            #       - name: test
-                                            #         action: disable
+                                            #       - name: mixer
+                                            #         repo: https://github.com/klen/mixer
+                                            #         branch: origin/develop
+                                            #         command: make test
 
 jenkins_java: /usr/bin/java
 jenkins_java_args:
@@ -47,6 +50,11 @@ jenkins_pidfile: /var/run/jenkins.pid
 jenkins_prefix: "/"
 jenkins_run_standalone: yes
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
+
+# System config
+# =============
+jenkins_system_config:
+  admin_email: nobody@example.com
 
 # Logging
 # =======
@@ -72,9 +80,4 @@ docker_files_enable: no
 docker_volume_directory                  : "{{ jenkins_home }}"
 docker_working_directory                 : "/home/vagrant"
 docker_image_name                        : "nabla/ansible-jenkins-master"
-
-# Sytem config
-# ===========
-jenkins_system_config:
-  admin_email: nobody@example.com
 

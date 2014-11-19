@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jenkins.model.JenkinsLocationConfiguration>
   <adminAddress>{{jenkins_system_config.admin_email}}</adminAddress>
-  <jenkinsUrl>http://{{jenkins_http_host}}:{{jenkins_http_port}}/</jenkinsUrl>
+{% if jenkins_proxy %}
+  <jenkinsUrl>http://{{jenkins_proxy_hostname}}:{{jenkins_proxy_port}}/</jenkinsUrl>{% else %}
+  <jenkinsUrl>http://{{jenkins_http_host}}:{{jenkins_http_port}}/</jenkinsUrl>{% endif %}
 </jenkins.model.JenkinsLocationConfiguration>

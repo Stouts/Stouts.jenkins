@@ -1,5 +1,16 @@
 ---
 
+- name: jenkins-jobs | Prepare jobs
+  template: src=job.sh.j2 dest={{jenkins_home}}/jobs/job.sh mode=0755
+
+- name: jenkins-jobs | Configure jobs
+  template: src=job.xml.j2 dest={{jenkins_home}}/jobs/{{item.name}}.xml owner={{jenkins_user}} group={{jenkins_group}}
+  when: item.action|default('create') not in ['delete', 'enable', 'disable']
+  with_items: jenkins_jobs
+  notify: jenkins update jobs
+  register: jenkins_jobs_changed
+
 - name: jenkins-jobs | Manage jobs
   shell: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://{{jenkins_http_host}}:{{jenkins_http_port}}{{ jenkins_prefix }}/ {{item.action|default('enable')}}-job {{item.name}}
+  when: item.action is defined
   with_items: jenkins_jobs

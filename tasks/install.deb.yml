@@ -1,7 +1,7 @@
 ---
 
 - name: jenkins-install | Add apt key
-  action: apt_key url="{{ jenkins_apt_key }}"  state=present   
+  apt_key: url={{ jenkins_apt_key }} id={{jenkins_apt_key_id}}
   
 - name: jenkins-install | Add apt repo
   apt_repository: repo="{{ jenkins_apt_repository }}" update_cache=yes
