@@ -12,5 +12,6 @@
 
 - name: jenkins-jobs | Manage jobs
   shell: java -jar {{jenkins_home}}/jenkins-cli.jar -s http://{{jenkins_http_host}}:{{jenkins_http_port}}{{ jenkins_prefix }}/ {{item.action|default('enable')}}-job {{item.name}}
+  sudo_user: "{{ jenkins_user }}"
   when: item.action is defined
   with_items: jenkins_jobs
