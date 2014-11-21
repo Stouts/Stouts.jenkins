@@ -2,7 +2,8 @@
 
 - name: jenkins restart
   service: name=jenkins state=restarted
-
+  sudo: yes
+  
 - name: jenkins update jobs
   command: "{{jenkins_home}}/jobs/job.sh {{item.item.name}}"
   sudo_user: "{{ jenkins_user }}"
@@ -15,6 +16,9 @@
 
 - name: nginx reload
   service: name=nginx state=reloaded
-
+  sudo: yes
+  
 - name: apache restart
   service: name=apache2 state=restarted
+  sudo: yes
+  

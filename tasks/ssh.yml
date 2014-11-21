@@ -9,6 +9,7 @@
     owner={{jenkins_user}}
     group={{jenkins_group}}
     mode=0600
+  sudo: yes    
   when: jenkins_ssh_key_file != ""
 
 - name: jenkins-ssh | Setup SSH hosts
@@ -20,4 +21,5 @@
     mode="0644"
     dest="{{jenkins_home}}/.ssh/known_hosts"
     owner="{{jenkins_user}}"
+  sudo: yes    
   with_items: jenkins_ssh_fingerprints
