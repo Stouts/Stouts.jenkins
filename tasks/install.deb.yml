@@ -2,20 +2,25 @@
 
 - name: jenkins-install | Add apt key
   apt_key: url={{ jenkins_apt_key }} id={{jenkins_apt_key_id}}
-  
+  sudo: yes
+
 - name: jenkins-install | Add apt repo
   apt_repository: repo="{{ jenkins_apt_repository }}" update_cache=yes
-  
+  sudo: yes
+
 - name: jenkins-install | Install jenkins
   apt: pkg={{item}}
   with_items: [curl, jenkins]
-  
+  sudo: yes
+
 - name: jenkins-install | Install additional deb packages
   apt: pkg={{item}}
+  sudo: yes
   with_items: jenkins_apt_packages
 
 - name: jenkins-install | Setup passlib
   apt: pkg=python-passlib
+  sudo: yes
   when: jenkins_proxy_auth
 
 # vim:sw=2

@@ -44,10 +44,12 @@
       
 - name: Apache | Compile Apache Jenkins configuration
   template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins.conf
+  sudo: yes  
   tags: apache
 
 - name: Apache | Enable our Jenkins site
   action: command a2ensite jenkins
+  sudo: yes  
   tags: apache
   notify:
     - apache restart  
