@@ -44,12 +44,12 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
     <triggers class="vector">
-    {% if job.poll|default(False) %}
+{% if job.poll|default(False) %}
     <hudson.triggers.SCMTrigger>
-      <spec>{{ job.pull }}</spec>
+      <spec>{{ job.poll }}</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
-    {% endif %}
+{% endif %}
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
@@ -58,12 +58,24 @@
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    {% if job.junit|default(False) %}
+{% if job.junit|default(False) %}
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>{{ job.junit }}</testResults>
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
-    {% endif %}
+{% endif %}
+{% if job.mail|default(False) %}
+     <hudson.tasks.Mailer>
+      <recipients>{{ job.mail }}</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+{% endif %}
+{% if job.chucknorris %}
+     <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+{% endif %}
   </publishers>
 </project>
