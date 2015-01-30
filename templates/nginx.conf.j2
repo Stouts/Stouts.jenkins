@@ -3,14 +3,17 @@
 
 server {
     listen            {{jenkins_proxy_port}};
-    {% if jenkins_proxy_hostname %}
+{% if jenkins_proxy_hostname %}
     server_name       {{jenkins_proxy_hostname}};
-    {% endif %}
+{% endif %}
     client_max_body_size 8m;
     ignore_invalid_headers off;
 
     location / {
         proxy_pass http://127.0.0.1:{{jenkins_http_port}};
+{% if jenkins_proxy_hostname %}
+        proxy_redirect http://127.0.0.1:{{jenkins_http_port}} $scheme://{{jenkins_proxy_hostname}};
+{% endif %}
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
