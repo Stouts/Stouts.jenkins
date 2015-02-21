@@ -5,11 +5,11 @@
   sudo: yes
 
 - name: jenkins-install | Add apt repo
-  apt_repository: repo="{{ jenkins_apt_repository }}" update_cache=yes
+  apt_repository: repo="{{ jenkins_apt_repository }}"
   sudo: yes
 
 - name: jenkins-install | Install jenkins
-  apt: pkg={{item}}
+  apt: pkg={{item}} state=latest update_cache=yes
   with_items: [curl, jenkins]
   sudo: yes
 
