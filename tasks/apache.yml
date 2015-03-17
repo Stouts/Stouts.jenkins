@@ -3,27 +3,15 @@
 # Apache2 setup.
 #
 
-- name: Apache | Enable required Apache proxy modules
+- name: Apache | Enable required Apache modules
   apache2_module: state=present name={{ item }}
   with_items:
     - proxy
     - proxy_http
-    
-- name: Apache | Enable some required modules (rewrite)
-  action: command a2enmod rewrite vhost_alias
-  tags: apache
+    - rewrite
+    - ssl
+  sudo: yes
 
-- name: Apache | Enable some required modules (proxy)
-  action: command a2enmod proxy
-  tags: apache
-
-- name: Apache | Enable some required modules (proxy_http)
-  action: command a2enmod proxy_http
-  tags: apache
-
-- name: Apache | Enable some required modules (ssl)
-  action: command a2enmod ssl
-  tags: apache
 
 - name: Apache | Disable the default site
   action: command a2dissite 000-default
