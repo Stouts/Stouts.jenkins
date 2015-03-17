@@ -26,6 +26,7 @@
     state: present
 #    validate: '/usr/sbin/apache2ctl -f %s -t'
   with_items: apache_ports_configuration_items
+  sudo: yes
   tags: apache
   notify:
     - apache restart      
@@ -40,4 +41,4 @@
   sudo: yes  
   tags: apache
   notify:
-    - apache restart  
+    - apache restart
