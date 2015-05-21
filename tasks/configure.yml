@@ -13,7 +13,6 @@
 - name: jenkins-configure | Ensure Jenkins restarted
   service: name=jenkins state=restarted
   sudo: yes  
-  when: jenkins_service_configure.changed
 
 - name: Wait untils Jenkins web API is available
   shell: curl --head --silent http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
