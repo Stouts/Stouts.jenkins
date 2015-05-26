@@ -4,6 +4,28 @@
   service: name=jenkins state=restarted
   sudo: yes
   
+- name: jenkins restart
+  wait_for: host="{{ jenkins_http_host }}" port="{{ jenkins_http_port}}" timeout=30
+
+- name: jenkins restart
+  shell: curl --head --silent http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
+  delay: 10
+  retries: 12
+  until: result.stdout.find("200 OK") != -1
+  register: result
+  changed_when: False
+
+- name: jenkins update jobs
+  shell: curl --head --silent http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
+  delay: 10
+  retries: 12
+  until: result.stdout.find("200 OK") != -1
+  register: result
+  changed_when: False
+
+- name: jenkins update jobs
+  wait_for: host="{{ jenkins_http_host }}" port="{{ jenkins_http_port}}" timeout=30
+
 - name: jenkins update jobs
   command: "{{jenkins_home}}/jobs/job.sh {{item.item.name}}"
   sudo_user: "{{ jenkins_user }}"
