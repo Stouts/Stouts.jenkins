@@ -5,13 +5,14 @@
   sudo: yes
   register: jenkins_service_configure
 
-- name: Create {{ jenkins_home }} folder
+- name: Create home folder
   file: path={{ jenkins_home }} state=directory mode=0755 owner={{ jenkins_user }}
   sudo: yes  
   ignore_errors: True
 
 - name: jenkins-configure | Ensure Jenkins restarted
   service: name=jenkins state=restarted
+  changed_when: False
   sudo: yes  
 
 - name: Wait untils Jenkins web API is available
