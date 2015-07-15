@@ -35,7 +35,7 @@
     <excludedUsers></excludedUsers>
     <gitConfigName></gitConfigName>
     <gitConfigEmail></gitConfigEmail>
-    <skipTag>false</skipTag>
+    <skipTag>{{ job.skip_tag|default("false") }}</skipTag>
     <includedRegions></includedRegions>
     <scmName></scmName>
   </scm>
