@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export JOB="$1"
-export CLI="java -jar {{jenkins_home}}/jenkins-cli.jar -s {{ jenkins_url }}"
+export CLI="java -jar {{jenkins_home}}/jenkins-cli.jar {{jenkins_cli_extra_opts}} -s {{ jenkins_url }}"
 
 [ -z "$JOB" ] && exit 1
 
