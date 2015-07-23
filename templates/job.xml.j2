@@ -72,7 +72,7 @@
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
 {% endif %}
-{% if job.chucknorris %}
+{% if job.chucknorris|default(False) %}
      <hudson.plugins.chucknorris.CordellWalkerRecorder>
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
