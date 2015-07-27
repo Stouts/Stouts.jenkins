@@ -66,6 +66,8 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
                                             # Ex. jenkins_jobs:
                                             #       - name: job
                                             #         action: enable  # (enable|disable|delete)
+                                            #       - name: job2
+                                            #         template: mytemplate.xml  # using custom template
                                             #       - name: mixer
                                             #         repo: https://github.com/klen/mixer
                                             #         branch: origin/develop
