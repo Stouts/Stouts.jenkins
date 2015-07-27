@@ -13,4 +13,7 @@
   sudo_user: "{{ jenkins_user }}"
   with_items: jenkins_plugins
   ignore_errors: yes
-  notify: jenkins restart
+  notify: 
+    - jenkins check web ready
+    - jenkins check cli ready
+    - jenkins restart
