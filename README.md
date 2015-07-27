@@ -38,6 +38,7 @@ jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep fil
 jenkins_http_host: 127.0.0.1                # Set HTTP host
 jenkins_http_port: 8000                     # Set HTTP port
 jenkins_url: http://{{jenkins_http_host}}:{{jenkins_http_port}}
+jenkins_cli_extra_opts: ""                  # Extra options for jenkins-cli.jar
 
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
 jenkins_ssh_fingerprints:                   # Set known hosts for ssh
