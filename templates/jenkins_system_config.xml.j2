@@ -2,6 +2,6 @@
 <jenkins.model.JenkinsLocationConfiguration>
   <adminAddress>{{jenkins_system_config.admin_email}}</adminAddress>
 {% if jenkins_proxy %}
-  <jenkinsUrl>http://{{jenkins_proxy_hostname}}:{{jenkins_proxy_port}}/</jenkinsUrl>{% else %}
+  <jenkinsUrl>{% if jenkins_proxy_ssl %}https{% else %}http{% endif %}://{{jenkins_proxy_hostname}}:{{jenkins_proxy_port}}/</jenkinsUrl>{% else %}
   <jenkinsUrl>{{jenkins_url}}/</jenkinsUrl>{% endif %}
 </jenkins.model.JenkinsLocationConfiguration>
