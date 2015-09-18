@@ -20,12 +20,15 @@ jenkins_ssh_fingerprints:                   # Set known hosts for ssh
   - "github.com,204.232.175.90 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
 
 jenkins_proxy: ""                           # Enable jenkins proxy. Values are: nginx, apache
-jenkins_proxy_hostname: "{{inventory_hostname}}" # Set proxy servername
-jenkins_proxy_port: 80                      # Set proxy port
-jenkins_proxy_auth: no                      # Enable http auth
-jenkins_proxy_auth_users: []                # Add http auth users
-                                            # jenkins_proxy_auth_users:
-                                            #   - { name: team, password: secret }
+jenkins_proxy_hostname: "{{inventory_hostname}}"              # Set proxy servername
+jenkins_proxy_port: 80                                        # Set proxy port
+jenkins_proxy_ssl: false                                      # Enable SSL
+jenkins_proxy_ssl_certificate: /etc/nginx/ssl/certificate.crt # Path to certificate
+jenkins_proxy_ssl_key: /etc/nginx/ssl/certificate.key         # Path to key
+jenkins_proxy_auth: no                                        # Enable http auth
+jenkins_proxy_auth_users: []                                  # Add http auth users
+                                                              # jenkins_proxy_auth_users:
+                                                              #   - { name: team, password: secret }
 
 #latest
 #jenkins_apt_key: "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
