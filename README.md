@@ -48,6 +48,9 @@ jenkins_ssh_fingerprints:                   # Set known hosts for ssh
 jenkins_proxy: ""                           # Enable jenkins proxy. Values are: nginx, apache
 jenkins_proxy_hostname: "{{inventory_hostname}}" # Set proxy servername
 jenkins_proxy_port: 80                      # Set proxy port
+jenkins_proxy_ssl: false                    # Enable SSL
+jenkins_proxy_ssl_certificate: /etc/nginx/ssl/certificate.crt # Path to certificate
+jenkins_proxy_ssl_key: /etc/nginx/ssl/certificate.key         # Path to key
 jenkins_proxy_auth: no                      # Enable http auth
 jenkins_proxy_auth_users: []                # Add http auth users
                                             # jenkins_proxy_auth_users:
