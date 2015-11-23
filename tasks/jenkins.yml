@@ -12,7 +12,6 @@
   tags: [jenkins, jenkins-plugins]
 
 - include: ssh.yml
-  when: jenkins_ssh_key_file != ""
   tags: [jenkins, jenkins-ssh]
 
 - include: jobs.yml
