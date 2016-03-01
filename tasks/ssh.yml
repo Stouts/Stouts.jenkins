@@ -11,6 +11,8 @@
     mode=0600
   when: jenkins_ssh_key_file != ""
 
+- debug: var=keys
+
 - name: jenkins-ssh from variable| Copy private key
   template: >
     src=ssh_private_key.j2
