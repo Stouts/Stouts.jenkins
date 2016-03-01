@@ -9,18 +9,16 @@
     owner={{jenkins_user}}
     group={{jenkins_group}}
     mode=0600
-  sudo: yes
   when: jenkins_ssh_key_file != ""
 
 - name: jenkins-ssh from variable| Copy private key
-  sudo: yes
   template: >
     src=ssh_private_key.j2
     dest="{{jenkins_home}}/.ssh/{{ item.file_name | default('id_rsa') }}"
     owner={{jenkins_user}}
     group={{jenkins_group}}
     mode=0600
-  with_items: jenkins_ssh_keys
+  with_items: "{{jenkins_ssh_keys}}"
 
 - name: jenkins-ssh | Setup SSH hosts
   lineinfile:
@@ -31,5 +29,4 @@
     mode="0644"
     dest="{{jenkins_home}}/.ssh/known_hosts"
     owner="{{jenkins_user}}"
-  sudo: yes
-  with_items: jenkins_ssh_fingerprints
+  with_items: "{{jenkins_ssh_fingerprints}}"

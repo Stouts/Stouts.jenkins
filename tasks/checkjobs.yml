@@ -11,12 +11,12 @@
        password={{item.password|default(None)}}
        return_content=yes
        user={{item.user|default(None)}}
-  with_items: jenkins_check_jobs
+  with_items: "{{jenkins_check_jobs}}"
   register: jenkins_result
   tags: [jenkins, jenkins-checkjobs]
 
 - name: jenkins-checkjobs | Check statuses of Jenkins jobs
   fail: msg="Jenkins build {{item.item.job}} is failed. Stop provision."
   when: ('"result":"SUCCESS"' not in item.content)
-  with_items: jenkins_result['results']
+  with_items: "{{jenkins_result['results']}}"
   tags: [jenkins, jenkins-checkjobs]

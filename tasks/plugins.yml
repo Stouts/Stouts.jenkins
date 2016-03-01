@@ -11,9 +11,9 @@
 - name: jenkins-plugins | Install Jenkins plugins.
   command: java -jar {{jenkins_home}}/jenkins-cli.jar {{jenkins_cli_extra_opts}} -s {{jenkins_url}}{{jenkins_prefix}} install-plugin {{item}} creates={{jenkins_home}}/plugins/{{item}}.jpi
   become_user: "{{ jenkins_user }}"
-  with_items: jenkins_plugins
+  with_items: "{{jenkins_plugins}}"
   ignore_errors: yes
   notify: 
-    - jenkins check web ready
-    - jenkins check cli ready
-    - jenkins restart
+  - jenkins check web ready
+  - jenkins check cli ready
+  - jenkins restart
