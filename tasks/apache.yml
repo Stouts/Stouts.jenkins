@@ -4,41 +4,33 @@
 #
 
 - name: Apache | Enable required Apache modules
-  apache2_module: state=present name={{ item }}
+  apache2_module:
+    name: "{{item}}"
+    state: present
   with_items:
-    - proxy
-    - proxy_http
-    - rewrite
-    - ssl
-  sudo: yes
-
+  - proxy
+  - proxy_http
+  - rewrite
+  - ssl
 
 - name: Apache | Disable the default site
   action: command a2dissite 000-default
   ignore_errors: yes  
-  tags: apache
       
 - name: Apache | Configure Apache
   lineinfile:
     dest: "{{ apache_server_root }}/ports.conf"
-    regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
     state: present
-#    validate: '/usr/sbin/apache2ctl -f %s -t'
-  with_items: apache_ports_configuration_items
-  sudo: yes
-  tags: apache
+  with_items: "{{apache_ports_configuration_items}}"
   notify:
-    - apache restart      
+  - apache restart      
       
 - name: Apache | Compile Apache Jenkins configuration
   template: src=apache.conf.j2 dest=/etc/apache2/sites-available/jenkins.conf
-  sudo: yes  
-  tags: apache
 
 - name: Apache | Enable our Jenkins site
   action: command a2ensite jenkins
-  sudo: yes  
-  tags: apache
   notify:
-    - apache restart
+  - apache restart
