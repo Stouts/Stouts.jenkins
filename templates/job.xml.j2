@@ -4,7 +4,18 @@
   <actions/>
   <description>{{ job.description|default("") }}</description>
   <keepDependencies>false</keepDependencies>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+  </properties>
+{% if job.repo|default(False) %}
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -18,32 +29,18 @@
         <name>{{ job.branch|default('origin/master') }}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
-    <disableSubmodules>false</disableSubmodules>
-    <recursiveSubmodules>false</recursiveSubmodules>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <authorOrCommitter>false</authorOrCommitter>
-    <pruneBranches>false</pruneBranches>
-    <remotePoll>false</remotePoll>
-    <ignoreNotifyCommit>false</ignoreNotifyCommit>
-    <useShallowClone>false</useShallowClone>
-    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
-    <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
-    <relativeTargetDir></relativeTargetDir>
-    <reference></reference>
-    <excludedRegions></excludedRegions>
-    <excludedUsers></excludedUsers>
-    <gitConfigName></gitConfigName>
-    <gitConfigEmail></gitConfigEmail>
-    <skipTag>{{ job.skip_tag|default("false") }}</skipTag>
-    <includedRegions></includedRegions>
-    <scmName></scmName>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.PerBuildTag/>
+    </extensions>
   </scm>
+{% endif %}
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers class="vector">
+  <triggers>
 {% if job.poll|default(False) %}
     <hudson.triggers.SCMTrigger>
       <spec>{{ job.poll }}</spec>
@@ -53,9 +50,14 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    {% for shell in job.shell|default([]) %}
     <hudson.tasks.Shell>
-      <command>{{ job.command|default("true") }}</command>
+      <command>{{ shell }}</command>
     </hudson.tasks.Shell>
+    {% endfor %}
+{% for xml in job.builders|default([]) %}
+{{xml}}
+{% endfor %}
   </builders>
   <publishers>
 {% if job.junit|default(False) %}
@@ -77,5 +79,9 @@
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
 {% endif %}
+{% for xml in job.publishers|default([]) %}
+{{xml}}
+{% endfor %}
   </publishers>
+  <buildWrappers/>
 </project>
