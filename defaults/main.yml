@@ -5,6 +5,7 @@ jenkins_enabled: yes                        # The role is enabled
 jenkins_name: jenkins
 jenkins_user: jenkins
 jenkins_group: jenkins
+jenkins_become_method: su
 jenkins_configuration: /etc/default/jenkins
 jenkins_home: /var/lib/jenkins              # Jenkins home location
 jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep files
