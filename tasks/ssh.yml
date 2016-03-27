@@ -1,6 +1,11 @@
 ---
 
-- file: dest={{jenkins_home}}/.ssh state=directory
+- file: >
+    dest={{jenkins_home}}/.ssh
+    state=directory
+    owner={{jenkins_user}}
+    group={{jenkins_group}}
+    mode=0700
 
 - name: jenkins-ssh from file| Copy private key
   copy: >
