@@ -38,7 +38,8 @@ jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep fil
 jenkins_listen_address: 127.0.0.1           # The address Jenkins will listen on
 jenkins_http_host: 127.0.0.1                # Set HTTP host
 jenkins_http_port: 8000                     # Set HTTP port
-jenkins_url: http://{{jenkins_http_host}}:{{jenkins_http_port}}
+jenkins_prefix: "/"
+jenkins_url: "http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{jenkins_prefix}}"
 jenkins_cli_extra_opts: ""                  # Extra options for jenkins-cli.jar
 
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
@@ -89,7 +90,6 @@ jenkins_java: /usr/bin/java
 jenkins_java_args:
   - "-Djava.awt.headless=true"
 jenkins_pidfile: /var/run/jenkins.pid
-jenkins_prefix: "/"
 jenkins_run_standalone: yes
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
 
