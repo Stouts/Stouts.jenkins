@@ -16,5 +16,7 @@
 - name: jenkins-jobs | Manage jobs
   shell: java -jar {{jenkins_home}}/jenkins-cli.jar {{jenkins_cli_extra_opts}} -s {{jenkins_url}}{{ jenkins_prefix }}/ {{item.action|default('enable')}}-job {{item.name}}
   become_user: "{{ jenkins_user }}"
+  become: true
+  become_method: '{{ jenkins_become_method }}'
   when: item.action is defined
   with_items: "{{jenkins_jobs}}"
