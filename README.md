@@ -35,7 +35,7 @@ jenkins_configuration: /etc/default/jenkins
 jenkins_home: /var/lib/jenkins              # Jenkins home location
 jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep files
 
-jenkins_listen_address: 0.0.0.0             # The address Jenkins will listen on
+jenkins_listen_address: 127.0.0.1           # The address Jenkins will listen on
 jenkins_http_host: 127.0.0.1                # Set HTTP host
 jenkins_http_port: 8000                     # Set HTTP port
 jenkins_url: http://{{jenkins_http_host}}:{{jenkins_http_port}}
