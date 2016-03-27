@@ -5,7 +5,10 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}-{{ ansible_lsb.codename }}.yml"
+  include_vars: "{{item}}"
+  with_first_found:
+  - "{{ ansible_os_family }}-{{ ansible_lsb.codename }}.yml"
+  - "Debian-default.yml"
   when: ansible_os_family == 'Debian'
   
 - include: jenkins.yml
