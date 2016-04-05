@@ -2,7 +2,7 @@
 
 - name: jenkins-configure | Configure Jenkins Service
   template:
-    dest: "{{jenkins_configuration}}"
+    dest: "{{ jenkins_configuration }}"
     src: jenkins.j2
   register: jenkins_service_configure
 
@@ -28,7 +28,7 @@
   when: not jenkins_service_configure.changed
 
 - name: Wait untils Jenkins web API is available
-  shell: curl --head --silent http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}/cli/
+  shell: curl --head --silent {{ jenkins_url }}/cli/
   delay: 10
   retries: 12
   until: result.stdout.find("200 OK") != -1
@@ -37,14 +37,14 @@
   when: jenkins_service_configure.changed
 
 - name: jenkins-configure | Copy jenkins-cli
-  get_url: url=http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}/jnlpJars/jenkins-cli.jar dest={{ jenkins_home }}/jenkins-cli.jar
+  get_url: url={{ jenkins_url }}/jnlpJars/jenkins-cli.jar dest={{ jenkins_home }}/jenkins-cli.jar
   register: jenkins_cli
   until: "'OK' in jenkins_cli.msg or 'file already exists' in jenkins_cli.msg"
   retries: 10
   delay: 10
 
 - name: jenkins-configure | Configure Jenkins System
-  template: src=jenkins_system_config.xml.j2 dest={{jenkins_home}}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
+  template: src=jenkins_system_config.xml.j2 dest={{ jenkins_home }}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
   notify: jenkins reload configuration
 
 - name: Configure log rotation
