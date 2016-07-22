@@ -35,7 +35,6 @@ jenkins_configuration: /etc/default/jenkins
 jenkins_home: /var/lib/jenkins              # Jenkins home location
 jenkins_root: /usr/share/jenkins            # Location of jenkins arch indep files
 
-jenkins_listen_address: 127.0.0.1           # The address Jenkins will listen on
 jenkins_http_host: 127.0.0.1                # Set HTTP host
 jenkins_http_port: 8000                     # Set HTTP port
 jenkins_prefix: "/"
@@ -89,7 +88,8 @@ jenkins_jobs: []                            # Simple manage Jenkins jobs
 jenkins_java: /usr/bin/java
 jenkins_java_args:
   - "-Djava.awt.headless=true"
-jenkins_pidfile: /var/run/jenkins.pid
+  - "-Djenkins.install.runSetupWizard=false"
+jenkins_pidfile: /run/jenkins/jenkins.pid
 jenkins_run_standalone: yes
 jenkins_war: "{{ jenkins_root }}/jenkins.war"
 
