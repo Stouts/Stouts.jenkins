@@ -69,5 +69,4 @@ PREFIX={{jenkins_prefix}}
 # --webroot=~/.jenkins/war
 JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT"
 JENKINS_ARGS="$JENKINS_ARGS --httpListenAddress=$HTTP_HOST --ajp13ListenAddress=$AJP_HOST"
-JENKINS_ARGS="$JENKINS_ARGS --preferredClassLoader=java.net.URLClassLoader"
 JENKINS_ARGS="$JENKINS_ARGS --prefix=$PREFIX"
