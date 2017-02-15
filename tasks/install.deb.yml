@@ -13,7 +13,7 @@
 - name: jenkins-install | Install jenkins
   apt:
     name: "{{item}}"
-  with_items: [curl, jenkins]
+  with_items: "{{jenkins_apt_core_packages}}"
 
 - name: jenkins-install | Install additional deb packages
   apt:
