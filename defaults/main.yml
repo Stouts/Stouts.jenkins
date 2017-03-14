@@ -48,6 +48,7 @@ jenkins_apt_key: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
 jenkins_apt_key_id: D50582E6
 jenkins_apt_repository: deb http://pkg.jenkins-ci.org/debian-stable binary/
 
+jenkins_apt_core_packages: [curl, jenkins]  # Ensure jenkins is installed
 jenkins_apt_packages: []                    # Ensure the packages installed
 jenkins_plugins: []                         # Ensure the plugins is installed
 jenkins_jobs: []                            # Simple manage Jenkins jobs
