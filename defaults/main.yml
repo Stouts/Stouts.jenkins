@@ -40,6 +40,9 @@ jenkins_proxy_auth_users: []                                  # Add http auth us
                                                               # jenkins_proxy_auth_users:
                                                               #   - { name: team, password: secret }
 
+jenkins_serve_builds_dir: ""                # Directory listing path for build outputs
+jenkins_serve_builds_url_path: ""           # Subpath to hosted location (do not conflict with Jenkins paths)
+
 #latest
 #jenkins_apt_key: "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
 #jenkins_apt_repository: "deb http://pkg.jenkins-ci.org/debian binary/"

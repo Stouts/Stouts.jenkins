@@ -40,6 +40,13 @@ server {
         {% endif %}
     }
 
+{% if jenkins_serve_builds_url_path %}
+    location {{ jenkins_serve_builds_url_path }} {
+        alias {{ jenkins_serve_builds_dir  }};
+        autoindex on;
+    }
+
+{% endif %}
     error_log         {{jenkins_logdir}}/nginx-error.log;
     access_log        {{jenkins_logdir}}/nginx-access.log;
 

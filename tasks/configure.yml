@@ -50,3 +50,7 @@
 - name: Configure log rotation
   template: src=logrotate.conf.j2 dest=/etc/logrotate.d/jenkins.conf
   when: jenkins_logrotate
+
+- name: jenkins-configure | Create build output path
+  file: path={{ jenkins_serve_builds_dir }} state=directory mode=0755 owner={{ jenkins_user }}
+  when: jenkins_serve_builds_dir != ""
