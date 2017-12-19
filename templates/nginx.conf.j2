@@ -25,9 +25,9 @@ server {
 {% endif %}
 
     location / {
-        proxy_pass http://127.0.0.1:{{jenkins_http_port}};
+        proxy_pass http://{{jenkins_http_host}}:{{jenkins_http_port}};
 {% if jenkins_proxy_hostname %}
-        proxy_redirect http://127.0.0.1:{{jenkins_http_port}} $scheme://{{jenkins_proxy_hostname}};
+        proxy_redirect http://{{jenkins_http_host}}:{{jenkins_http_port}} $scheme://{{jenkins_proxy_hostname}};
 {% endif %}
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
