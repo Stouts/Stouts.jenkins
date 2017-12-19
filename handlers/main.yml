@@ -1,33 +1,10 @@
 ---
 
 - name: jenkins restart
-  service: name=jenkins state=restarted
-  become: yes
-  
-- name: jenkins check web ready
-  wait_for: host="{{ jenkins_http_host }}" port="{{ jenkins_http_port }}" timeout=30
-
-- name: jenkins check cli ready
-  shell: curl --head --silent {{ jenkins_url }}/cli/
-  delay: 10
-  retries: 12
-  until: result.stdout.find("200 OK") != -1
-  register: result
-  changed_when: False
-
-- name: jenkins update jobs
-  command: "{{ jenkins_home }}/jobs/job.sh {{ item.item.name }}"
-  become_user: "{{ jenkins_user }}"
-  become: true
-  become_method: '{{ jenkins_become_method }}'
-  when: item.changed
-  with_items: "{{ jenkins_jobs_changed.results }}"
-
-- name: jenkins reload configuration
-  command: java -jar {{ jenkins_home }}/jenkins-cli.jar {{ jenkins_cli_extra_opts }} -s {{ jenkins_url }} reload-configuration
-  become_user: "{{ jenkins_user }}"
-  become: true
-  become_method: '{{ jenkins_become_method }}'
+  docker_container:
+    name: jenkins
+    state: started
+    restart: true
 
 - name: nginx reload
   service: name=nginx state=reloaded

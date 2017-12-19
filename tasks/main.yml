@@ -1,28 +1,28 @@
 ---
 
-- name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
-  when: ansible_os_family == 'RedHat'
+# - name: Include OS-specific variables.
+  # include_vars: "{{ ansible_os_family }}.yml"
+  # when: ansible_os_family == 'RedHat'
 
-- name: Include OS-specific variables.
-  include_vars: "{{item}}"
-  with_first_found:
-  - "{{ ansible_os_family }}-{{ ansible_lsb.codename }}.yml"
-  - "Debian-default.yml"
-  when: ansible_os_family == 'Debian'
+# - name: Include OS-specific variables.
+  # include_vars: "{{item}}"
+  # with_first_found:
+  # - "{{ ansible_os_family }}-{{ ansible_lsb.codename }}.yml"
+  # - "Debian-default.yml"
+  # when: ansible_os_family == 'Debian'
   
-- include: jenkins.yml
+- import_tasks: jenkins.yml
   when: jenkins_enabled
   tags: [jenkins]
 
-- include: checkjobs.yml
-  when: jenkins_check_jobs
-  tags: [jenkins]
+# - import_tasks: checkjobs.yml
+  # when: jenkins_check_jobs
+  # tags: [jenkins]
   
-- name: Copy Dockerfile
-  template: src=Dockerfile.j2 dest={{ docker_files_generated_directory }}/Dockerfile mode=0777
-  when: docker_files_enable
+# - name: Copy Dockerfile
+  # template: src=Dockerfile.j2 dest={{ docker_files_generated_directory }}/Dockerfile mode=0777
+  # when: docker_files_enable
   
-- name: Copy build.sh
-  template: src=build.sh.j2 dest={{ docker_files_generated_directory }}/build.sh mode=0777
-  when: docker_files_enable
+# - name: Copy build.sh
+  # template: src=build.sh.j2 dest={{ docker_files_generated_directory }}/build.sh mode=0777
+  # when: docker_files_enable
