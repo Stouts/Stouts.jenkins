@@ -1,0 +1,11 @@
+---
+
+- name: Run docker containers
+  docker_container:
+    name: "{{item.name}}"
+    image: "{{item.image}}"
+    hostname: "{{item.hostname|default(omit)}}"
+    networks: "{{item.networks|default(jenkins_networks)}}"
+    restart_policy: "{{item.restart_policy|default('always')}}"
+    env: "{{item.env|default(omit)}}"
+  with_items: "{{ jenkins_docker_containers }}"
