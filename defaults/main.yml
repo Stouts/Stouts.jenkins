@@ -20,6 +20,7 @@ jenkins_proxy_port: "{{jenkins_proxy_ssl and 443 or 80}}"   # Set proxy port
 jenkins_apk_packages: [make]                                  # Ensure the packages installed
 jenkins_plugins: []                                           # Ensure the plugins is installed
 jenkins_exec: []                                              # Exec commands inside Jenkins master
+jenkins_docker_containers: []                                 # Run additional docker containers
 
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
 # Jenkins ssh keys object

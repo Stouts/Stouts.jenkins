@@ -40,7 +40,7 @@ server {
         {% endif %}
     }
 
-    error_log         {{jenkins_logdir}}/nginx-error.log;
-    access_log        {{jenkins_logdir}}/nginx-access.log;
+    error_log         /var/log/jenkins-error.log;
+    access_log        /var/log/jenkins-access.log;
 
 }

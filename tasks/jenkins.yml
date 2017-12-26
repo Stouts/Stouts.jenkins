@@ -58,3 +58,7 @@
   become: true
   when: jenkins_proxy == "apache"
   tags: [jenkins, jenkins-apache]
+
+- import_tasks: docker.yml
+  when: jenkins_docker_containers
+  tags: [jenkins, jenkins-docker]
