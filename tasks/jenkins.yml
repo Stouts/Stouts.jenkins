@@ -28,10 +28,12 @@
     networks: "{{jenkins_networks}}"
     user: root
     volumes:
-    - "{{jenkins_home}}:/var/jenkins_home"
+    - "{{jenkins_home}}:{{jenkins_home}}"
     - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
     - "{{jenkins_http_host}}:{{jenkins_http_port}}:8080"
+    env:
+      JENKINS_HOME: "{{jenkins_home}}"
 
 - name: Exec commands
   shell: docker exec jenkins {{item}}
