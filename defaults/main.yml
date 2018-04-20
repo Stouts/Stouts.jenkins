@@ -21,6 +21,9 @@ jenkins_apk_packages: [make]                                  # Ensure the packa
 jenkins_plugins: []                                           # Ensure the plugins is installed
 jenkins_exec: []                                              # Exec commands inside Jenkins master
 jenkins_docker_containers: []                                 # Run additional docker containers
+jenkins_volumes:
+- "{{jenkins_home}}:{{jenkins_home}}"
+- "/var/run/docker.sock:/var/run/docker.sock"
 
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
 # Jenkins ssh keys object
