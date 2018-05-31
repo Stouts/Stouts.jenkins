@@ -28,6 +28,7 @@
     networks: "{{jenkins_networks}}"
     user: root
     volumes: "{{jenkins_volumes}}"
+    links: "{{jenkins_links|default(omit)}}"
     ports:
     - "{{jenkins_http_host}}:{{jenkins_http_port}}:8080"
     env:
